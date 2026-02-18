@@ -13,7 +13,20 @@ import {
 
 export default class App extends Component {
   state = {
-    location: null
+    currentLocation: null,
+    location: null,
+    poi1: {
+      coords: {
+        latitude: 33.307146,
+        longitude: -111.681177,
+      },
+    },
+    poi2: {
+      coords: {
+        latitude: 33.423204,
+        longitude: -111.939612,
+      },
+    },
   };
 
   async componentDidMount() {
@@ -30,27 +43,57 @@ export default class App extends Component {
 
   render() {
     return this.state.location ? (
-      <MapView
-        style={styles.map}
-        region={{
-          latitude: this.state.location.coords.latitude,
-          longitude: this.state.location.coords.longitude,
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
-        }}
-      >
-        <Marker
-          coordinate={this.state.location.coords}
-          title={"User Location"}
-          description={"You are here!"}
-          image={require("./assets/you-are-here.png")}
-        />
-      </MapView>
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: this.state.currentLocation.coords.latitude,
+            longitude: this.state.currentLocation.coords.longitude,
+            latitudeDelta: 0.09,
+            longitudeDelta: 0.04,
+          }}
+        >
+          <Marker
+            coordinate={this.state.currentLocation.coords}
+            // title={"User Location"}
+            // description={"You are here!"}
+            image={require("./assets/you-are-here.png")}
+          />
+        </MapView>
+        <View style={styles.rowContainer}>
+          <TouchableOpacity
+            onPress={() => this.setState({ currentLocation: this.state.location })}
+            style={styles.button}
+          >
+            <Text>You</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.setState({ currentLocation: this.state.poi1 })}
+            style={styles.button}
+          >
+            <Text>POI 1</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.setState({ currentLocation: this.state.poi2 })}
+            style={styles.button}
+          >
+            <Text>POI 2</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     ) : null;
   }
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    aspectRatio: 1,
+    backgroundColor: '#3066be',
+    borderRadius: '25%',
+    justifyContent: 'center',
+    margin: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
