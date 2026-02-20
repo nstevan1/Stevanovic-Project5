@@ -42,8 +42,8 @@ export default class Notification extends Component {
             <Animated.View
                 onLayout={this.onLayoutChange}
                 style={[
-                    { top },
-                    styles.main
+                    styles.main,
+                    { top }
                 ]}
             >
                 <Text style={styles.text}>{message}</Text>
