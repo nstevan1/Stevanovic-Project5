@@ -36,7 +36,7 @@ export default class Notification extends Component {
         const { message } = this.props;
         const top = this.animatedValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [-height, 0],
+            outputRange: [-height, -1],
         });
         return (
             <Animated.View
