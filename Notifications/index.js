@@ -65,7 +65,7 @@ export default class Notification extends Component {
         const { autoHide, onClose } = this.props;
 
         this.animatedValue.setValue(1);
-        this.getAnimation(0, autoHide).start(() => onClose());
+        this.getAnimation(-1, autoHide).start(() => onClose());
     }
 
     UNSAFE_componentWillMount() { this.animatedValue = new Animated.Value(0); }
